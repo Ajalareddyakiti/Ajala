@@ -18,148 +18,250 @@ engine.setProperty('volume', 1.0)
 rate = engine.getProperty('rate')
 engine.setProperty('rate', 150)
 
-greetings = ['hey there', 'hello', 'hi', 'hai', 'hey!', 'hey', 'good morning', 'hii']
-question = ['how are you', 'how are you doing']
-responses = ['Okay', "I'm fine"]
-var5 = ['what can you do for me', 'what can you do', 'what will you do']
-var1 = ['who made you', 'who created you']
-var2 = ['I was created by my team seems like i am their project', 'my team']
-var3 = ['what time is it', 'what is the time', 'time']
-var4 = ['who are you', 'what is your name']
-var6 = ['I want to go shopping', 'I need a dress', 'I want a new dress']
-cmd1 = ['open browser', 'open Google', 'open the default browser']
-cmd2 = ['play music', 'play songs', 'play a song', 'open music player']
-cmd3 = ['tell a joke', 'tell me a joke', 'say something funny', 'tell something funny']
-jokes = ['Can a kangaroo jump higher than a house? Of course, a house doesnt jump at all.',
+
+def speech():
+    greetings = ['hey there', 'hello', 'hi', 'hai', 'hey!', 'hey', 'good morning', 'hii']
+    question = ['how are you', 'how are you doing']
+    responses = ['Okay', "I'm fine"]
+    var5 = ['what can you do for me', 'what can you do', 'what will you do']
+    var1 = ['who made you', 'who created you']
+    var2 = ['I was created by my team seems like i am their project', 'my team']
+    var3 = ['what time is it', 'what is the time', 'time']
+    var4 = ['who are you', 'what is your name']
+    var6 = ['I want to go shopping', 'I need a dress', 'I want a new dress']
+    cmd1 = ['open browser', 'open Google', 'open the default browser']
+    cmd2 = ['play music', 'play songs', 'play a song', 'open music player']
+    cmd3 = ['tell a joke', 'tell me a joke', 'say something funny', 'tell something funny']
+    jokes = ['Can a kangaroo jump higher than a house? Of course, a house doesnt jump at all.',
          'My dog used to chase people on a bike a lot. It got so bad, finally I had to take his bike away.',
          'Doctor: Im sorry but you suffer from a terminal illness and have only 10 to live.Patient: What do you mean,'
          ' 10? 10 what? Months? Weeks?!"Doctor: Nine.']
-cmd4 = ['open YouTube', 'i want to watch a video']
-cmd5 = ['how is the weather today ', 'weather', 'what about the weather', "what is today's temperature", 'temperature',
+    cmd4 = ['open YouTube', 'i want to watch a video']
+    cmd5 = ['how is the weather today ', 'weather', 'what about the weather', "what is today's temperature", 'temperature',
         "I want today's weather report","can I have today's weather report"]
-cmd6 = ['exit', 'close', 'goodbye', 'nothing', 'okay bye', ' I am satisfied with your service']
-cmd7 = ['what is your color', 'what is your colour', 'your color', 'your color?']
-colrep = ['Right now its rainbow', 'Right now its transparent', 'Right now its non chromatic']
-cmd8 = ['what is your favourite colour', 'what is your favourite color']
-cmd9 = ['thank you']
-repfr9 = ['your welcome', 'glad i could help you']
-stop = ['stop']
-engine.say('I am ready say something')
-while True:
-    now = datetime.datetime.now()
-    r = sr.Recognizer()
-    with sr.Microphone() as source:
-        engine.runAndWait()
-        print("speak:")
-        audio = r.listen(source)
-        try:
-            print("You said:- " + r.recognize_google(audio))
-        except sr.UnknownValueError:
-            print("Could not understand that")
-            engine.say('I didnt get that. Rerun the code')
+    cmd6 = ['exit', 'close', 'goodbye', 'nothing', 'okay bye', ' I am satisfied with your service']
+    cmd7 = ['what is your color', 'what is your colour', 'your color', 'your color?']
+    colrep = ['Right now its rainbow', 'Right now its transparent', 'Right now its non chromatic']
+    cmd8 = ['what is your favourite colour', 'what is your favourite color']
+    cmd9 = ['thank you']
+    repfr9 = ["you're welcome", 'glad i could help you']
+    stop = ['stop']
+    engine.say('I am ready say something')
+    while True:
+        now = datetime.datetime.now()
+        r = sr.Recognizer()
+        with sr.Microphone() as source:
             engine.runAndWait()
+            print("speak:")
+            audio = r.listen(source)
+            try:
+                print("You said:- " + r.recognize_google(audio))
+            except sr.UnknownValueError:
+                print("Could not understand that")
+                engine.say('I didnt get that. Rerun the code')
+                engine.runAndWait()
 
-    if r.recognize_google(audio) in greetings:
-        random_greeting = random.choice(greetings)
-        print(random_greeting)
-        engine.say(random_greeting)
-        engine.runAndWait()
-    elif r.recognize_google(audio) in question:
-        engine.say('I am fine . Getting to know more people')
-        engine.runAndWait()
-        print('I am fine')
-    elif r.recognize_google(audio) in var5:
-        engine.say('anything you ask for, which doesnt involve me physically ,you know right! am just an ai bot')
-        engine.runAndWait()
-        print('i am helpful ,just give it a try.')
-    elif r.recognize_google(audio) in var1:
-        engine.say('I was made by my team . it Seems like i am their project.')
-        engine.runAndWait()
-        reply = random.choice(var2)
-        print(reply)
-    elif r.recognize_google(audio) in cmd9:
-        print(random.choice(repfr9))
-        engine.say(random.choice(repfr9))
-        engine.runAndWait()
-    elif r.recognize_google(audio) in cmd7:
-        print(random.choice(colrep))
-        engine.say(random.choice(colrep))
-        engine.runAndWait()
-        print('It keeps changing every micro second')
-        engine.say('It keeps changing every micro second')
-        engine.runAndWait()
-    elif r.recognize_google(audio) in cmd8:
-        print("its kind of complicated")
-        engine.say(random.choice(colrep))
-        engine.runAndWait()
-        print('It keeps changing every micro second')
-        engine.say('It keeps changing every micro second')
-        engine.runAndWait()
-    elif r.recognize_google(audio) in cmd2:
-        mixer.init()
-        mixer.music.load("C:\\Users\\ajala\\Music\\song.mp3")
-        mixer.music.play()
-    elif r.recognize_google(audio) in stop:
-        engine.runAndWait()
-        mixer.music.stop()
+        if r.recognize_google(audio) in greetings:
+            random_greeting = random.choice(greetings)
+            print(random_greeting)
+            engine.say(random_greeting)
+            engine.runAndWait()
+        elif r.recognize_google(audio) in question:
+            engine.say('I am fine . Getting to know more people')
+            engine.runAndWait()
+            print('I am fine')
+        elif r.recognize_google(audio) in var5:
+            engine.say('anything you ask for, which doesnt involve me physically ,you know right! I am just an ai bot')
+            engine.runAndWait()
+            print('i am helpful ,just give it a try.')
+        elif r.recognize_google(audio) in var1:
+            engine.say('I was made by my team . Seems i am their project.')
+            engine.runAndWait()
+            reply = random.choice(var2)
+            print(reply)
+        elif r.recognize_google(audio) in cmd9:
+            print(random.choice(repfr9))
+            engine.say(random.choice(repfr9))
+            engine.runAndWait()
+        elif r.recognize_google(audio) in cmd7:
+            print(random.choice(colrep))
+            engine.say(random.choice(colrep))
+            engine.runAndWait()
+            print('It keeps changing every micro second')
+            engine.say('It keeps changing every micro second')
+            engine.runAndWait()
+        elif r.recognize_google(audio) in cmd8:
+            print("its kind of complicated")
+            engine.say(random.choice(colrep))
+            engine.runAndWait()
+            print('It keeps changing every micro second')
+            engine.say('It keeps changing every micro second')
+            engine.runAndWait()
+        elif r.recognize_google(audio) in cmd2:
+            mixer.init()
+            mixer.music.load("C:\\Users\\ajala\\Music\\song.mp3")
+            mixer.music.play()
+        elif r.recognize_google(audio) in stop:
+            engine.runAndWait()
+            mixer.music.stop()
 
-    elif r.recognize_google(audio) in var4:
-        engine.say('I am a bot,  yeah but i got a name,it is Baeymax ')
-        print('ai assistant but the name is Baymax')
-        engine.runAndWait()
-    elif r.recognize_google(audio) in var6:
-        engine.say('i know what to do')
-        webbrowser.open('www.myntra.com')
-    elif r.recognize_google(audio) in cmd4:
-        engine.say('as requested.')
-        webbrowser.open('www.youtube.com')
-    elif r.recognize_google(audio) in cmd6:
-        engine.say('okay, bye! see you later.')
-        engine.runAndWait()
-        print('okay bye! see you later.')
-        exit()
+        elif r.recognize_google(audio) in var4:
+            engine.say('I am a bot, yeah but i got a name, it is Baeymax ')
+            print('ai assistant but the name is Baymax')
+            engine.runAndWait()
+        elif r.recognize_google(audio) in var6:
+            engine.say('i know what to do')
+            webbrowser.open('www.myntra.com')
+        elif r.recognize_google(audio) in cmd4:
+            engine.say('as requested.')
+            webbrowser.open('www.youtube.com')
+        elif r.recognize_google(audio) in cmd6:
+            engine.say('okay, bye! see you later.')
+            engine.runAndWait()
+            print('okay bye! see you later.')
+            exit()
 
-    elif r.recognize_google(audio) in cmd5:
-        owm = pyowm.OWM('0e2c36c705118e3b1b42dfaf8c465bb9')
-        observation = owm.weather_at_place('Hyderabad,IN')
-        observation_list = owm.weather_around_coords(17.3850, 78.4867)
-        w = observation.get_weather()
-        w.get_wind()
-        w.get_humidity()
-        w.get_temperature('celsius')
-        print(w)
-        print(w.get_wind())
-        print(w.get_humidity())
-        print(w.get_temperature('celsius'))
-        engine.say('sure!'+w.get_wind())
-        engine.runAndWait()
-        engine.say('humidity')
-        engine.runAndWait()
-        engine.say(w.get_humidity())
-        engine.runAndWait()
-        engine.say('temperature')
-        engine.runAndWait()
-        engine.say(w.get_temperature('celsius'))
-        engine.runAndWait()
-    elif r.recognize_google(audio) in var3:
+        elif r.recognize_google(audio) in cmd5:
+            owm = pyowm.OWM('0e2c36c705118e3b1b42dfaf8c465bb9')
+            observation = owm.weather_at_place('Hyderabad,IN')
+            observation_list = owm.weather_around_coords(17.3850, 78.4867)
+            w = observation.get_weather()
+            w.get_wind()
+            w.get_humidity()
+            w.get_temperature('celsius')
+            print(w)
+            print("sure",w.get_wind())
+            print(w.get_humidity())
+            print(w.get_temperature('celsius'))
+            engine.say(w.get_wind())
+            engine.runAndWait()
+            engine.say('humidity')
+            engine.runAndWait()
+            engine.say(w.get_humidity())
+            engine.runAndWait()
+            engine.say('temperature')
+            engine.runAndWait()
+            engine.say(w.get_temperature('celsius'))
+            engine.runAndWait()
+        elif r.recognize_google(audio) in var3:
 
-        print("Current date and time : ")
-        print(now.strftime("The time is %H:%M"))
-        engine.say(now.strftime("The time is %H:%M"))
-        engine.runAndWait()
-    elif r.recognize_google(audio) in cmd1:
-        engine.say('know what you want and come back soon i will be waiting ')
-        engine.runAndWait()
-        webbrowser.open('www.google.com')
-    elif r.recognize_google(audio) in cmd3:
-        jokrep = random.choice(jokes)
-        engine.say(jokrep)
-        engine.runAndWait()
-    else:
-        engine.say("please wait")
-        engine.runAndWait()
-        print(wikipedia.summary(r.recognize_google(audio)))
-        engine.say(wikipedia.summary(r.recognize_google(audio)))
-        engine.runAndWait()
-        userInput3 = input("or else search in google")
-        webbrowser.open_new('www.google.com/search?q=' + userInput3)
+            print("Current date and time : ")
+            print(now.strftime("The time is %H:%M"))
+            engine.say(now.strftime("The time is %H:%M"))
+            engine.runAndWait()
+        elif r.recognize_google(audio) in cmd1:
+            engine.say('know what you want and come back soon I will be waiting ')
+            engine.runAndWait()
+            webbrowser.open('www.google.com')
+        elif r.recognize_google(audio) in cmd3:
+            jokrep = random.choice(jokes)
+            engine.say(jokrep)
+            engine.runAndWait()
+        else:
+            engine.say("please wait")
+            engine.runAndWait()
+            print(wikipedia.summary(r.recognize_google(audio)))
+            engine.say(wikipedia.summary(r.recognize_google(audio)))
+            engine.runAndWait()
+            userInput3 = input("or else search in google")
+            webbrowser.open_new('www.google.com/search?q=' + userInput3)
+
+
+def main():
+    speech()
+
+
+if __name__=="__main__":
+    main()
+
+
+from nltk.chat.util import Chat, reflections
+
+
+def chatty():
+    pairs = [
+        [
+            r"my name is (.*)",
+            ["Hello %1, How are you today ?", ]
+        ],
+        [
+            r"what is your name ?",
+            ["My name is Chatty and I'm a chatbot ?", ]
+        ],
+        [
+            r"how are you ?",
+            ["I'm doing good\nHow about You ?", ]
+        ],
+        [
+            r"sorry",
+            ["Its alright", "Its OK, never mind", ]
+        ],
+        [
+            r"i'm (.*) doing good|am fine",
+            ["Nice to hear that", "Alright :)", ]
+        ],
+        [
+            r"hi|hey|hello",
+            ["Hello", "Hey there", ]
+        ],
+        [
+            r"(.*) age?",
+            ["I'm a computer program dude\nSeriously you are asking me this?", ]
+
+        ],
+        [
+            r"what (.*) want ?",
+            ["Make me an offer I can't refuse", ]
+
+        ],
+        [
+            r"(.*) created ?",
+            ["Nagesh created me using Python's NLTK library ", "top secret ;)", ]
+        ],
+        [
+            r"(.*) (location|city) ?",
+            ['Chennai, Tamil Nadu', ]
+        ],
+        [
+            r"how is weather in (.*)?",
+            ["Weather in %1 is awesome like always", "Too hot man here in %1", "Too cold man here in %1",
+             "Never even heard about %1"]
+        ],
+        [
+            r"i work in (.*)?",
+            ["%1 is an Amazing company, I have heard about it. But they are in huge loss these days.", ]
+        ],
+        [
+            r"(.*)raining in (.*)",
+            ["No rain since last week here in %2", "Damn its raining too much here in %2"]
+        ],
+        [
+            r"how (.*) health(.*)",
+            ["I'm a computer program, so I'm always healthy ", ]
+        ],
+        [
+            r"(.*) (sports|game) ?",
+            ["I'm a very big fan of Football", ]
+        ],
+        [
+            r"who (.*) sportsperson ?",
+            ["Messy", "Ronaldo", "Roony"]
+        ],
+        [
+            r"who (.*) (moviestar|actor)?",
+            ["Brad Pitt"]
+        ],
+        [
+            r"quit",
+            ["Bye take care. See you soon :) ", "It was nice talking to you. See you soon :)"]
+        ],
+    ]
+
+    print("Hi, I'm Chatty and I chat alot ;)\nPlease type lowercase English language to start a conversation. "
+          "Type quit to leave ")
+
+    chat = Chat(pairs, reflections)
+    chat.converse()
+
+if __name__ == "__main__":
+    chatty()
